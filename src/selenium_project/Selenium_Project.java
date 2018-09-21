@@ -14,7 +14,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-
 /**
  *
  * @author Vipul Chandoor
@@ -25,17 +24,17 @@ public class Selenium_Project {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws FileNotFoundException, InterruptedException {
-        
+
         Scanner scanid = new Scanner(new File("NorthwestIDs.txt"));
         Scanner scanpassword = new Scanner(new File("password.txt"));
         PrintWriter pwrt = new PrintWriter(new File("output.txt"));
 
-         System.setProperty("webdriver.chrome.driver", "C:\\Users\\S530459\\Downloads\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\S530459\\Downloads\\chromedriver.exe");
         WebDriver driver = new ChromeDriver();
         driver.get("https://nwmissouri.instructure.com/login/ldap");
-        
-       while(scanid.hasNext()) {
-           
+
+        while (scanid.hasNext()) {
+
             WebElement searchbox = driver.findElement(By.id("pseudonym_session_unique_id"));
             String str = scanid.next();
             searchbox.sendKeys(str);
@@ -46,16 +45,23 @@ public class Selenium_Project {
 //            Thread.sleep(1000);
             WebElement searchbox2 = driver.findElement(By.tagName("Button"));
             searchbox2.click();
+            Thread.sleep(2000);
+            pwrt.println("https://nwmissouri.instructure.com/login/ldap".equals(driver.getCurrentUrl()));
+            if (!"https://nwmissouri.instructure.com/login/ldap".equals(driver.getCurrentUrl())) {
+                driver.findElement(By.cssSelector("h2[title$='GRAD DIRECT PROJECT II 03FA18']")).click();
+                driver.findElement(By.partialLinkText("Workshops")).click();
+            }
 
-                      pwrt.println("https://nwmissouri.instructure.com/login/ldap".equals(driver.getCurrentUrl()));
-              driver.get("https://nwmissouri.instructure.com/login/ldap");
+            pwrt.println("https://nwmissouri.instructure.com/login/ldap".equals(driver.getCurrentUrl()));
+            driver.get("https://nwmissouri.instructure.com/login/ldap");
 //              Thread.sleep(1000);
+            
         }
         pwrt.close();
         scanid.close();
         scanpassword.close();
         driver.quit();
-        
+
     }
-    
+
 }
