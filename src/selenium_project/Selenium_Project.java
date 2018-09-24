@@ -50,9 +50,10 @@ public class Selenium_Project {
             if (!"https://nwmissouri.instructure.com/login/ldap".equals(driver.getCurrentUrl())) {
                 driver.findElement(By.cssSelector("h2[title$='GRAD DIRECT PROJECT II 03FA18']")).click();
                 driver.findElement(By.partialLinkText("Workshops")).click();
+                Thread.sleep(1000);
             }
 
-            pwrt.println("https://nwmissouri.instructure.com/login/ldap".equals(driver.getCurrentUrl()));
+//            pwrt.println("https://nwmissouri.instructure.com/login/ldap".equals(driver.getCurrentUrl()));
             driver.get("https://nwmissouri.instructure.com/login/ldap");
 //              Thread.sleep(1000);
             
